@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us">
+<head>
+   <!--
+     | Version 10.1.1
+     | Copyright 2012 Esri
+     |
+     | Licensed under the Apache License, Version 2.0 (the "License");
+     | you may not use this file except in compliance with the License.
+     | You may obtain a copy of the License at
+     |
+     |    http://www.apache.org/licenses/LICENSE-2.0
+     |
+     | Unless required by applicable law or agreed to in writing, software
+     | distributed under the License is distributed on an "AS IS" BASIS,
+     | WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     | See the License for the specific language governing permissions and
+     | limitations under the License.
+    -->
+<title>Blank Template</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7, IE=9">
+
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
+<script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
+
+<!--Social Media Links-->
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher:'77225c91-2742-42f7-b1b4-bddda99a9bde'});</script>
+<!--END Social Media Links-->
+
+<!--Google Analytics Start-->
+<script type="text/javascript">
+  if (window.location.href.toLowerCase().indexOf("storymaps.esri.com") >= 0) {
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-26529417-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+		 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+  }
+</script>
+<!--Google Analytics End-->
+
+<script type="text/javascript">
+
+dojo.require("dijit.layout.BorderContainer");
+dojo.require("dijit.layout.ContentPane");
+dojo.require("esri.arcgis.utils");
+dojo.require("esri.map");
+
+/******************************************************
+***************** begin config section ****************
+*******************************************************/
+
+var TITLE = "This is the title."
+var BYLINE = "This is the byline"
+var WEBMAP_ID = "87bb88214d2944bbbf1d9d9255c812ca";
+var GEOMETRY_SERVICE_URL = "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer";
+
+/******************************************************
+***************** end config section ******************
+*******************************************************/
+
+var _map;
+
+var _dojoReady = false;
+var _jqueryReady = false;
+
+var _initExtent; // new esri.geometry.Extent({"xmin":-9346414,"ymin":3131127,"xmax":-9033328,"ymax":3339953,"spatialReference":{"wkid":102100}});
+
+var _isMobile = isMobile();
+
+dojo.addOnLoad(function() {_dojoReady = true;init()});
+jQuery(document).ready(function() {_jqueryReady = true;init()});
+
+
+function init() {
+	
+	
+	if (!_jqueryReady) return;
+	if (!_dojoReady) return;
+	
+	// jQuery event assignment
+	
+	$(this).resize(handleWindowResize);
+	
+	$("#zoomIn").click(function(e) {
+        _map.setLevel(_map.getLevel()+1);
+    });
+	$("#zoomOut").click(function(e) {
+        _map.setLevel(_map.getLevel()-1);
+    });
+	$("#zoomExtent").click(function(e) {
+        _map.setExtent(_initExtent);
+    });
+	
+	$("#title").append(TITLE);
+	$("#subtitle").append(BYLINE);	
+
+	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
+		mapOptions: {
+			slider: false,
+			wrapAround180: true,
+			extent:_initExtent
+		},
+		ignorePopups: false,
+		geometryServiceURL: GEOMETRY_SERVICE_URL
+	});
+	
+	mapDeferred.addCallback(function(response) {	  
+
+		_map = response.map;
+		$("#description").append(response.itemInfo.item.description);
+		$("#mapTitle").append(response.itemInfo.item.title);
+				
+		//resize the map when the browser resizes
+		dojo.connect(dijit.byId('map'), 'resize', _map, _map.resize);
+		
+		if(_map.loaded){
+			initMap();
+		} else {
+			dojo.connect(_map,"onLoad",function(){
+				initMap();
+			});
+		}
+		
+		handleWindowResize();
+		
+	});
+	
+}
+
+function initMap() {
+}
+
+function handleWindowResize() {
+	var heightDoc = getViewportDimensions()[1];
+	$("#mainWindow").height(heightDoc - ($("#header").height()));
+	dijit.byId("mainWindow").layout();
+	$("#map").height($("#mainWindow").height());
+
+}
+
+</script>
+
+</head>
+
+<body class="claro">
+    
+    <!-- Header Section-->
+    <div id="header">
+      <div id="headerText">
+	    <h1 id="title"></h1>
+	    <h2 id="subtitle"></h2>
+      </div>
+      <div id="logoArea">
+        <div id="social"><a id="msLink" href="http://mapstories.esri.com" target="_blank">A story map </a><span  class='st_facebook' ></span><span  class='st_twitter' ></span>
+        </div>
+        <div id="logo"><a id="logoLink" href="http://www.esri.com" target="_blank"><img id="logoImg" src="images/esriGlobeLogow.png" alt="Esri - Home"></a></div>
+      </div>
+    </div>
+    
+      <!--Content-->
+      <div id="mainWindow" dojotype="dijit.layout.BorderContainer" gutters="false" region="center" style="width:100%;height:100%">
+      
+      	<!--Sidebar Section-->
+        <div dojotype="dijit.layout.ContentPane" id="leftPane" region="left">
+          <div id="descriptionPanel">
+	          <h3 id="mapTitle" class='mapTitle'></h3>
+        	  <div id="description" class="description"></div>
+          </div><!--/descriptionPanel-->
+        </div><!--/leftPane-->
+        
+        <!--Map Section-->
+        <div dojotype="dijit.layout.ContentPane" id="map" region="center">
+            <div id="zoomToggle">
+                <img id="zoomIn" src="images/ZoomLight_01.png">
+                <img id="zoomExtent" src="images/ZoomHome.png">
+                <img id="zoomOut" src="images/ZoomLight_03.png">
+            </div><!--?zoomToggle-->
+        </div><!--mapPane-->
+            
+      </div><!--/content-->    
+
+        
+</body>
+
+</html>
