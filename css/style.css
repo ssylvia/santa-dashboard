@@ -164,26 +164,3 @@ a:hover{
 	height:100%;
 	width:100%;
 }
-
-#leftPane {
-    width:30%;
-	min-width:400px;
-	height:100%;
-	font-size:0.9em;
-}
-	  
-#descriptionPanel {
-	height:45%;
-	overflow-x:hidden;
-	overflow-y:auto;
-}
-
-.description{
-	padding:20px;
-}
-
-.mapTitle{
-	padding:20px 20px 10px 20px;
-	color:#444;
-	font-weight:bold;
-}

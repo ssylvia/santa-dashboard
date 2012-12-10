@@ -87,7 +87,6 @@ jQuery(document).ready(function() {_jqueryReady = true;init()});
 
 function init() {
 	
-	
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
 
@@ -147,15 +146,6 @@ function handleWindowResize() {
     
       <!--Content-->
       <div id="mainWindow" dojotype="dijit.layout.BorderContainer" gutters="false" region="center" style="width:100%;height:100%">
-      
-      	<!--Sidebar Section-->
-        <div dojotype="dijit.layout.ContentPane" id="leftPane" region="left">
-          <div id="descriptionPanel">
-	          <h3 id="mapTitle" class='mapTitle'></h3>
-        	  <div id="description" class="description"></div>
-          </div><!--/descriptionPanel-->
-        </div><!--/leftPane-->
-        
         <!--Map Section-->
         <div dojotype="dijit.layout.ContentPane" id="map" region="center">
             <div id="zoomToggle">
