@@ -17,41 +17,41 @@
      | See the License for the specific language governing permissions and
      | limitations under the License.
     -->
-<title>Blank Template</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=7, IE=9">
-
-<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
-<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-<script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
-<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
-<script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
-
-<!--Social Media Links-->
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher:'77225c91-2742-42f7-b1b4-bddda99a9bde'});</script>
-<!--END Social Media Links-->
-
-<!--Google Analytics Start-->
-<script type="text/javascript">
-  if (window.location.href.toLowerCase().indexOf("storymaps.esri.com") >= 0) {
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-26529417-1']);
-	  _gaq.push(['_trackPageview']);
-	
-	  (function() {
-		 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-  }
-</script>
-<!--Google Analytics End-->
+    <title>Santa's Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9">
+    
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
+    <script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
+    
+    <!--Social Media Links-->
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher:'77225c91-2742-42f7-b1b4-bddda99a9bde'});</script>
+    <!--END Social Media Links-->
+    
+    <!--Google Analytics Start-->
+    <script type="text/javascript">
+      if (window.location.href.toLowerCase().indexOf("storymaps.esri.com") >= 0) {
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-26529417-1']);
+          _gaq.push(['_trackPageview']);
+        
+          (function() {
+             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+               ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+               var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+      }
+    </script>
+    <!--Google Analytics End-->
 
 <script type="text/javascript">
 
@@ -64,10 +64,9 @@ dojo.require("esri.map");
 ***************** begin config section ****************
 *******************************************************/
 
-var TITLE = "This is the title."
-var BYLINE = "This is the byline"
-var WEBMAP_ID = "87bb88214d2944bbbf1d9d9255c812ca";
-var GEOMETRY_SERVICE_URL = "http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer";
+var TITLE = "Santa's Dashboard"
+var BYLINE = "Discover and browse recent YouTube videos and Flickr photos on holiday themes.  Tap on the dashboard to switch themes; zoom in to discover more."
+var SATELLITE_URL = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
 
 /******************************************************
 ***************** end config section ******************
@@ -78,7 +77,7 @@ var _map;
 var _dojoReady = false;
 var _jqueryReady = false;
 
-var _initExtent; // new esri.geometry.Extent({"xmin":-9346414,"ymin":3131127,"xmax":-9033328,"ymax":3339953,"spatialReference":{"wkid":102100}});
+var _initExtent; 
 
 var _isMobile = isMobile();
 
@@ -91,10 +90,20 @@ function init() {
 	
 	if (!_jqueryReady) return;
 	if (!_dojoReady) return;
+
+	$("#title").append(TITLE);
+	$("#subtitle").append(BYLINE);	
+
+	_initExtent = new esri.geometry.Extent({"xmin":-16407360,"ymin":-748663,"xmax":-4197004,"ymax":10365891,"spatialReference":{"wkid":102100}});
 	
-	// jQuery event assignment
-	
-	$(this).resize(handleWindowResize);
+	_map = new esri.Map("map",{slider:false,wrapAround180:true,extent:_initExtent});
+	_map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(SATELLITE_URL));
+	dojo.connect(_map, 'onLoad', init2);
+	dojo.connect(dijit.byId('map'), 'resize', _map, _map.resize);
+		
+}
+
+function init2() {
 	
 	$("#zoomIn").click(function(e) {
         _map.setLevel(_map.getLevel()+1);
@@ -105,44 +114,8 @@ function init() {
 	$("#zoomExtent").click(function(e) {
         _map.setExtent(_initExtent);
     });
-	
-	$("#title").append(TITLE);
-	$("#subtitle").append(BYLINE);	
-
-	var mapDeferred = esri.arcgis.utils.createMap(WEBMAP_ID, "map", {
-		mapOptions: {
-			slider: false,
-			wrapAround180: true,
-			extent:_initExtent
-		},
-		ignorePopups: false,
-		geometryServiceURL: GEOMETRY_SERVICE_URL
-	});
-	
-	mapDeferred.addCallback(function(response) {	  
-
-		_map = response.map;
-		$("#description").append(response.itemInfo.item.description);
-		$("#mapTitle").append(response.itemInfo.item.title);
-				
-		//resize the map when the browser resizes
-		dojo.connect(dijit.byId('map'), 'resize', _map, _map.resize);
-		
-		if(_map.loaded){
-			initMap();
-		} else {
-			dojo.connect(_map,"onLoad",function(){
-				initMap();
-			});
-		}
-		
-		handleWindowResize();
-		
-	});
-	
-}
-
-function initMap() {
+	$(this).resize(handleWindowResize);
+	handleWindowResize();
 }
 
 function handleWindowResize() {
