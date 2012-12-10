@@ -93,12 +93,13 @@ function init() {
 	$("#title").append(TITLE);
 	$("#subtitle").append(BYLINE);	
 
+	$(this).resize(handleWindowResize);
+
 	_initExtent = new esri.geometry.Extent({"xmin":-16407360,"ymin":-748663,"xmax":-4197004,"ymax":10365891,"spatialReference":{"wkid":102100}});
 	
 	_map = new esri.Map("map",{slider:false,wrapAround180:true,extent:_initExtent});
 	_map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(SATELLITE_URL));
 	dojo.connect(_map, 'onLoad', init2);
-	dojo.connect(dijit.byId('map'), 'resize', _map, _map.resize);
 		
 }
 
@@ -113,16 +114,31 @@ function init2() {
 	$("#zoomExtent").click(function(e) {
         _map.setExtent(_initExtent);
     });
-	$(this).resize(handleWindowResize);
+	
+	$(".check").click(function(e){
+		processQuery();
+	});
+	
+	$(".controlCaption").click(function(e){
+		var check = $(e.target).parent().find("input");
+		if ($(check).attr("checked")) $(check).attr("checked",false);
+		else $(check).attr("checked",true);
+		processQuery()
+	});
+	
 	handleWindowResize();
 }
 
 function handleWindowResize() {
 	var heightDoc = getViewportDimensions()[1];
-	$("#mainWindow").height(heightDoc - ($("#header").height()));
+	$("#mainWindow").height(heightDoc - $("#header").height());
 	dijit.byId("mainWindow").layout();
-	$("#map").height($("#mainWindow").height());
+	$("#map").height($("#mainWindow").height() - $("#controlBar").height());
+	if (_map) _map.resize();
+}
 
+function processQuery() {
+	alert('test');
 }
 
 </script>
@@ -146,6 +162,41 @@ function handleWindowResize() {
     
       <!--Content-->
       <div id="mainWindow" dojotype="dijit.layout.BorderContainer" gutters="false" region="center" style="width:100%;height:100%">
+      
+      	<div id="controlBar" dojotype="dijit.layout.ContentPane" region="top">
+        	<table id="tableControls">
+            	<tr>
+                	<td>
+                    	<div class="controlGroup">
+                        	<input type="checkbox" class="check" /><span class="controlCaption">Santa Claus</span>
+	                        <div class="controlCount"></div>
+                        </div>
+                    </td>
+                	<td>
+                    	<div class="controlGroup">
+                        	<input type="checkbox" class="check" /><span class="controlCaption">Christmas lights</span>
+	                        <div class="controlCount"></div>
+                        </div>
+                    </td>
+                    <td>
+                    <div id="picture"></div>
+                    </td>
+                	<td>
+                    	<div class="controlGroup">
+                        	<input type="checkbox" class="check" /><span class="controlCaption">Christmas tree</span>
+	                        <div class="controlCount"></div>
+                        </div>
+                    </td>
+                	<td>
+                    	<div class="controlGroup">
+                        	<input type="checkbox" class="check" /><span class="controlCaption">Holidays</span>
+	                        <div class="controlCount"></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+      
         <!--Map Section-->
         <div dojotype="dijit.layout.ContentPane" id="map" region="center">
             <div id="zoomToggle">
