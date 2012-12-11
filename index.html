@@ -108,8 +108,8 @@ function init() {
 	dojo.connect(_map, 'onLoad', init2);
 	
 	var locationsService = new LocationsService(CSV_FILE);		  
-	$(locationsService).bind("complete", function(){
-		_locations = locationsService.getLocations();
+	$(locationsService).bind("complete", function(event,locations){
+		_locations = locations;
 		_selected = _locations[0];
 		init2();
 	});
