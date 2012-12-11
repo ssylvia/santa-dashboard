@@ -109,12 +109,7 @@ function init() {
 	dojo.connect(_map, 'onLoad', init2);
 	
 	_locationsService = new LocationsService(CSV_FILE);		  
-	$(_locationsService).bind("complete", function(event,locations){
-		_locations = locations;
-		_selected = _locations[0];
-		loadLocations();
-	});
-	
+	$(_locationsService).bind("complete", processQueryResults);
 	
 }
 
@@ -133,17 +128,17 @@ function init2() {
     });
 	
 	$(".check").click(function(e){
-		processQuery();
+		doQuery();
 	});
 	
 	$(".controlCaption").click(function(e){
 		var check = $(e.target).parent().find("input");
 		if ($(check).attr("checked")) $(check).attr("checked",false);
 		else $(check).attr("checked",true);
-		processQuery()
+		doQuery();
 	});
-
-	_locationsService.doQuery();	
+	
+	doQuery();
 	handleWindowResize();
 }
 
@@ -155,8 +150,14 @@ function handleWindowResize() {
 	if (_map) _map.resize();
 }
 
-function processQuery() {
-	alert('test');
+function doQuery() {
+	_locationsService.doQuery();	
+}
+
+function processQueryResults(event,locations){
+	_locations = locations;
+	loadLocations();
+	_selected = _locations[0];		
 }
 
 function loadLocations() {
