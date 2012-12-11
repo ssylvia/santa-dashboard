@@ -153,7 +153,7 @@ function handleWindowResize() {
 }
 
 function doQuery() {
-	_locationsService.doQuery();	
+	_locationsService.executeQuery();	
 }
 
 function processQueryResults(event,locations){
@@ -163,6 +163,7 @@ function processQueryResults(event,locations){
 }
 
 function loadLocations() {
+	_map.graphics.clear();
 	$.each(_locations,function(index,value) {
 		_map.graphics.add(value);
 	});
