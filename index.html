@@ -109,6 +109,7 @@ function init() {
 	dojo.connect(_map, 'onLoad', init2);
 	
 	_locationsService = new LocationsService(CSV_FILE);		  
+	$(_locationsService).bind("load", init2);
 	$(_locationsService).bind("complete", processQueryResults);
 	
 }
@@ -116,7 +117,8 @@ function init() {
 function init2() {
 	
 	if (!_map.loaded) return;
-		
+	if (!_locationsService.isLoaded()) return;	
+	
 	$("#zoomIn").click(function(e) {
         _map.setLevel(_map.getLevel()+1);
     });
