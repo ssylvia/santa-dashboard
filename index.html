@@ -77,6 +77,7 @@ var CSV_FILE = "data/xmas-haps.csv";
 *******************************************************/
 
 var _map;
+var _locationsService;
 var _locations;
 var _selected;
 
@@ -107,13 +108,12 @@ function init() {
 	_map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(SATELLITE_URL));
 	dojo.connect(_map, 'onLoad', init2);
 	
-	var locationsService = new LocationsService(CSV_FILE);		  
-	$(locationsService).bind("complete", function(event,locations){
+	_locationsService = new LocationsService(CSV_FILE);		  
+	$(_locationsService).bind("complete", function(event,locations){
 		_locations = locations;
 		_selected = _locations[0];
-		init2();
+		loadLocations();
 	});
-	locationsService.doQuery();		
 	
 	
 }
@@ -121,7 +121,6 @@ function init() {
 function init2() {
 	
 	if (!_map.loaded) return;
-	if (!_locations) return;
 		
 	$("#zoomIn").click(function(e) {
         _map.setLevel(_map.getLevel()+1);
@@ -143,8 +142,8 @@ function init2() {
 		else $(check).attr("checked",true);
 		processQuery()
 	});
-	
-	loadLocations();
+
+	_locationsService.doQuery();	
 	handleWindowResize();
 }
 
