@@ -107,13 +107,13 @@ function init() {
 	_map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(SATELLITE_URL));
 	dojo.connect(_map, 'onLoad', init2);
 	
-	var locationsService = new LocationsService();		  
+	var locationsService = new LocationsService(CSV_FILE);		  
 	$(locationsService).bind("complete", function(){
 		_locations = locationsService.getLocations();
 		_selected = _locations[0];
 		init2();
 	});
-	locationsService.process(CSV_FILE);		
+	locationsService.doQuery();		
 	
 	
 }
