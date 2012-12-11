@@ -29,7 +29,10 @@
     
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
+    <script type="text/javascript" src="lib/PointAtts.js"></script>
     <script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
+	<script type="text/javascript" src="lib/ie8_compatibility.js"></script>
+    <script type="text/javascript" src="lib/LocationsService.js"></script>
     
     <!--Social Media Links-->
     <script type="text/javascript">var switchTo5x=true;</script>
@@ -67,12 +70,15 @@ dojo.require("esri.map");
 var TITLE = "Santa's Dashboard"
 var BYLINE = "Discover and browse recent YouTube videos and Flickr photos on holiday themes.  Tap on the dashboard to switch themes; zoom in to discover more."
 var SATELLITE_URL = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+var CSV_FILE = "data/xmas-haps.csv";
 
 /******************************************************
 ***************** end config section ******************
 *******************************************************/
 
 var _map;
+var _locations;
+var _selected;
 
 var _dojoReady = false;
 var _jqueryReady = false;
@@ -100,11 +106,23 @@ function init() {
 	_map = new esri.Map("map",{slider:false,wrapAround180:true,extent:_initExtent});
 	_map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(SATELLITE_URL));
 	dojo.connect(_map, 'onLoad', init2);
-		
+	
+	var locationsService = new LocationsService();		  
+	$(locationsService).bind("complete", function(){
+		_locations = locationsService.getLocations();
+		_selected = _locations[0];
+		init2();
+	});
+	locationsService.process(CSV_FILE);		
+	
+	
 }
 
 function init2() {
 	
+	if (!_map.loaded) return;
+	if (!_locations) return;
+		
 	$("#zoomIn").click(function(e) {
         _map.setLevel(_map.getLevel()+1);
     });
@@ -126,6 +144,7 @@ function init2() {
 		processQuery()
 	});
 	
+	loadLocations();
 	handleWindowResize();
 }
 
@@ -139,6 +158,12 @@ function handleWindowResize() {
 
 function processQuery() {
 	alert('test');
+}
+
+function loadLocations() {
+	$.each(_locations,function(index,value) {
+		_map.graphics.add(value);
+	});
 }
 
 </script>
