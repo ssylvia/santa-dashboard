@@ -177,8 +177,8 @@ a:hover{
 }
 
 #pictureFrame {
-	width:300px;
-	height:225px;
+	width:280px;
+	height:250px;
 	background-color:#FFCC00;
 	overflow:hidden;
 	position:absolute;
@@ -191,8 +191,8 @@ a:hover{
 	position:absolute;
 	left:10px;
 	top:10px;
-	width:280px;
-	height:auto;
+	max-width:260px;
+	max-height:230px;
 }
 
 .controlGroup {
