@@ -169,6 +169,7 @@ a:hover{
 	background-color:#999966;
 	overflow:visible;
 	z-index:1000;
+	position:relative;
 }
 
 #tableControls {
@@ -180,11 +181,16 @@ a:hover{
 	height:225px;
 	background-color:#FFCC00;
 	overflow:hidden;
+	position:absolute;
+	top:0px;
+	left:50%;
+	margin-left:-150px
 }
 
 #media {
-	margin-left:10px;
-	margin-top:10px;
+	position:absolute;
+	left:10px;
+	top:10px;
 	width:280px;
 	height:auto;
 }
