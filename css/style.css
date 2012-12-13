@@ -183,7 +183,9 @@ a:hover{
 }
 
 #media {
-	width:300px;
+	margin-left:10px;
+	margin-top:10px;
+	width:280px;
 	height:auto;
 }
 
@@ -205,4 +207,16 @@ a:hover{
 
 .check {
 	cursor:pointer;
+}
+
+#queryInProgress {
+	position:absolute;
+	left:50%;
+	margin-left:-50px;
+	top:50%;
+	width:120px;
+	padding-left:3px;
+	z-index:100;
+	background-color:#FFFF66;
+	display:none;
 }
