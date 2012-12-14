@@ -20,35 +20,35 @@
     <title>Santa's Dashboard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9">
-    
+
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    
+
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
     <script type="text/javascript" src="lib/PointAtts.js"></script>
     <script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
 	<script type="text/javascript" src="lib/ie8_compatibility.js"></script>
-    <script type="text/javascript" src="lib/FlickrRequest.js"></script>    
+    <script type="text/javascript" src="lib/FlickrRequest.js"></script>
     <script type="text/javascript" src="lib/LocationsService.js"></script>
     <script type="text/javascript" src="lib/main.js"></script>
-    
+
     <!--Social Media Links-->
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher:'77225c91-2742-42f7-b1b4-bddda99a9bde'});</script>
     <!--END Social Media Links-->
-    
+
     <!--Google Analytics Start-->
     <script type="text/javascript">
       if (window.location.href.toLowerCase().indexOf("storymaps.esri.com") >= 0) {
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-26529417-1']);
           _gaq.push(['_trackPageview']);
-        
+
           (function() {
              var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -61,7 +61,7 @@
 </head>
 
 <body class="claro">
-    
+
     <!-- Header Section-->
     <div id="header">
       <div id="headerText">
@@ -74,12 +74,13 @@
         <div id="logo"><a id="logoLink" href="http://www.esri.com" target="_blank"><img id="logoImg" src="images/esriGlobeLogow.png" alt="Esri - Home"></a></div>
       </div>
     </div>
-    
+
       <!--Content-->
       <div id="mainWindow" dojotype="dijit.layout.BorderContainer" gutters="false" region="center" style="width:100%;height:100%">
-      
+
       	<div id="controlBar" dojotype="dijit.layout.ContentPane" region="top">
-        	<table id="tableControls">
+            <img id="woodPane" src="images/DashboardSmall.png" alt="Controls">
+        	<!--<table id="tableControls">
             	<tr>
                 	<td>
                     	<div class="controlGroup">
@@ -108,13 +109,11 @@
                         </div>
                     </td>
                 </tr>
-            </table>
-            <div id="pictureFrame">
+            </table>-->
                 <img id="media"/>
-            </div>
-            
+
         </div>
-      
+
         <!--Map Section-->
         <div dojotype="dijit.layout.ContentPane" id="map" region="center">
             <div id="zoomToggle">
@@ -122,13 +121,13 @@
                 <img id="zoomExtent" src="images/ZoomHome.png">
                 <img id="zoomOut" src="images/ZoomLight_03.png">
             </div><!--?zoomToggle-->
-            <div id="hoverInfo"></div>     
-            <div id="queryInProgress">Query In Progress</div>       
+            <div id="hoverInfo"></div>
+            <div id="queryInProgress">Query In Progress</div>
         </div><!--mapPane-->
-            
-      </div><!--/content-->    
 
-        
+      </div><!--/content-->
+
+
 </body>
 
 </html>
