@@ -24,11 +24,13 @@
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/esri/css/esri.css" />
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.2/js/dojo/dijit/themes/claro/claro.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/slimbox2.css" type="text/css" media="screen" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.2"></script>
+    <script type="text/javascript" src="lib/slimbox2.js"></script>
     <script type="text/javascript" src="lib/PointAtts.js"></script>
     <script type="text/javascript" src="http://storymaps.esri.com/common/helper_functions.js"></script>
 	<script type="text/javascript" src="lib/ie8_compatibility.js"></script>
@@ -81,7 +83,7 @@
       	<div id="controlBar" dojotype="dijit.layout.ContentPane" region="top">
             <img id="woodPane" src="images/DashboardSmall.png" alt="Controls">
             <div id="pictureFrame">
-                <img id="media"/>
+                <a id="lightboxLink" href="" rel="lightbox" title=""><img id="media"/></a>
             </div>
 
         	<table id="tableControls">
