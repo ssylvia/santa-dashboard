@@ -250,3 +250,7 @@ a:hover{
 	background-color:#FFFF66;
 	display:none;
 }
+
+.sourceLink {
+	text-decoration:underline;
+}
