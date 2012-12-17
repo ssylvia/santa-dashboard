@@ -178,7 +178,7 @@ a:hover{
 
 #tableControls {
 	margin:auto;
-    margin-top:-194px;
+    margin-top:-90px;
 }
 
 .check, .controlCaption, .controlCount{
@@ -186,13 +186,20 @@ a:hover{
 }
 
 #pictureFrame {
-	width:210px;
-	height:160px;
+	width:220px;
+	height:169px;
 	overflow:hidden;
+	position:absolute;
+	top:28px;
+	left:50%;
+	margin-left:-110px;
+}
+
+#frameGraphic {
 	position:absolute;
 	top:17px;
 	left:50%;
-	margin-left:-105px;
+	margin-left:-123px;
 }
 
 #media {
