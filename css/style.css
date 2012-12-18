@@ -242,9 +242,9 @@ a:hover{
 #queryInProgress {
 	position:absolute;
 	left:50%;
-	margin-left:-50px;
+	margin-left:-60px;
 	top:50%;
-	width:100px;
+	width:120px;
 	z-index:100;
 	background-color:#FFFFFF;
 	display:none;
@@ -253,14 +253,12 @@ a:hover{
 #progressInner {
 	position:relative;
 	overflow:hidden;
-	margin:5px;
+	margin-top:-30px;
+	margin-left:10px;
 }
 
 #progressBar {
-	background-color:#F00;
-	width:100px;
-	height:20px;
-	margin-left:-75px;
+	margin-left:-90px;
 }
 
 .sourceLink {
