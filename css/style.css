@@ -186,20 +186,21 @@ a:hover{
 }
 
 #pictureFrame {
-	width:220px;
-	height:169px;
+	width:270px;
+	height:208px;
 	overflow:hidden;
 	position:absolute;
-	top:11px;
+	top:13px;
 	left:50%;
-	margin-left:-110px;
+	margin-left:-135px;
 }
 
 #frameGraphic {
+	width:300px;
 	position:absolute;
 	top:0px;
 	left:50%;
-	margin-left:-123px;
+	margin-left:-150px;
 }
 
 #media {
@@ -217,8 +218,6 @@ a:hover{
 
 .controlGroup {
 	width:150px;
-	margin-left:20px;
-	margin-right:20px;
 }
 
 .controlCaption {
