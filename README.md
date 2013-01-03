@@ -1,6 +1,6 @@
 # santa-dashboard
 
-A story map that locates Flickr and YouTube Christmas results accross the globe. Users select which Christmas terms to map then images and videos can be viewed in the media frame.
+A story map that locates Flickr and YouTube Christmas results across the globe. Users select which Christmas terms to map then images and videos can be viewed in the media frame.
 
 [View live app here](http://storymaps.esri.com/stories/2012/santa-dashboard/)
 
