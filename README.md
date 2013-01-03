@@ -1,20 +1,22 @@
 # santa-dashboard
 
-A story map that locates Flickr and Youtube Christmas results accross the globe. Users select which Christmas terms to map then images and videos can be viewed in the media frame.
+A story map that locates Flickr and YouTube Christmas results accross the globe. Users select which Christmas terms to map then images and videos can be viewed in the media frame.
 
 [View live app here](http://storymaps.esri.com/stories/2012/santa-dashboard/)
 
 ![App](https://raw.github.com/Esri/santa-dashboard/master/images/santa-dashboard.png)
 
 ## Features
-* Search Flickr and Youtube for Christmas related keywords.
+* Search Flickr and YouTube for Christmas related keywords.
 * Lightbox for photos and fullscreen Youtube option.
 
 ## Instructions
 
-1. [Install the web applciation](#install-the-web-application)
-2. [Configure the application](#configure-the-application)
-3. [Personalize the application](#personalize-the-application)
+Fork or Download the source code to create you're own photo and video enabled map. Refer to the following resources for help:
+
+* [ArcGIS for JavaScript API Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
+* [Flickr API](http://www.flickr.com/services/api/)
+* [YouTube API](https://developers.google.com/youtube/)
 
 #### Install the web application
 
